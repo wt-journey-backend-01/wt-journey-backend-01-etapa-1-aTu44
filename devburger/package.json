@@ -1,0 +1,13 @@
+{
+  "name": "devburger",
+  "version": "1.0.0",
+  "description": "Cardápio digital para hamburgueria DevBurger",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.18.2"
+  }
+}

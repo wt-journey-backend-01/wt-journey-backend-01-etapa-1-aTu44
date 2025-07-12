@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevBurger - Cardápio</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="/" class="logo">
+                <i class="fas fa-hamburger"></i>
+                DevBurger
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#cardapio"><i class="fas fa-utensils"></i> Cardápio</a></li>
+                    <li><a href="/sugestao"><i class="fas fa-lightbulb"></i> Sugerir Lanche</a></li>
+                    <li><a href="/contato"><i class="fas fa-envelope"></i> Contato</a></li>
+                    <li><a href="/api/lanches"><i class="fas fa-code"></i> API</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Os Melhores Hamburgers Gourmet da Cidade</h1>
+            <p>Ingredientes selecionados, combinações incríveis e sabores que vão te surpreender. Tudo feito na hora para você!</p>
+            <a href="#cardapio" class="btn">Ver Cardápio</a>
+        </div>
+    </section>
+
+    <!-- Cardápio -->
+    <section id="cardapio" class="cardapio-section">
+        <div class="container">
+            <h2 class="section-title">Nosso Cardápio</h2>
+            <div class="lanches-container">
+                <div class="lanche-card">
+                    <div class="lanche-img">🍔</div>
+                    <div class="lanche-info">
+                        <h3>DevBurger Clássico</h3>
+                        <p>Pão brioche, Carne 150g, Queijo cheddar, Alface americana, Tomate fresco, Molho especial</p>
+                        <div class="lanche-price">R$ 24,90</div>
+                    </div>
+                </div>
+                <div class="lanche-card">
+                    <div class="lanche-img">🥓</div>
+                    <div class="lanche-info">
+                        <h3>Burger de Bacon</h3>
+                        <p>Pão australiano, Carne 180g, Queijo prato, Bacon crocante, Cebola caramelizada, Molho barbecue</p>
+                        <div class="lanche-price">R$ 28,90</div>
+                    </div>
+                </div>
+                <div class="lanche-card">
+                    <div class="lanche-img">🥬</div>
+                    <div class="lanche-info">
+                        <h3>Commit Veggie</h3>
+                        <p>Pão integral, Burger de grão de bico, Queijo vegano, Rúcula, Tomate seco, Maionese de ervas</p>
+                        <div class="lanche-price">R$ 26,90</div>
+                    </div>
+                </div>
+                <div class="lanche-card">
+                    <div class="lanche-img">🧀</div>
+                    <div class="lanche-info">
+                        <h3>Cheese Supreme</h3>
+                        <p>Pão brioche, 2x carne, 3x queijo cheddar, Cebola crispy, Molho especial</p>
+                        <div class="lanche-price">R$ 32,90</div>
+                    </div>
+                </div>
+                <div class="lanche-card">
+                    <div class="lanche-img">🍗</div>
+                    <div class="lanche-info">
+                        <h3>Frango Crocante</h3>
+                        <p>Pão australiano, Filé de frango empanado, Alface, Tomate, Maionese de ervas</p>
+                        <div class="lanche-price">R$ 26,90</div>
+                    </div>
+                </div>
+                <div class="lanche-card">
+                    <div class="lanche-img">🌶️</div>
+                    <div class="lanche-info">
+                        <h3>Hot & Spicy</h3>
+                        <p>Pão brioche, Carne apimentada, Queijo pepper jack, Pimentões, Molho de pimenta</p>
+                        <div class="lanche-price">R$ 29,90</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>DevBurger</h3>
+                    <p>Hamburgueria gourmet com ingredientes selecionados e sabores inovadores. Tudo feito na hora para você!</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#cardapio"><i class="fas fa-chevron-right"></i> Cardápio</a></li>
+                        <li><a href="/sugestao"><i class="fas fa-chevron-right"></i> Sugerir Lanche</a></li>
+                        <li><a href="/contato"><i class="fas fa-chevron-right"></i> Contato</a></li>
+                        <li><a href="/api/lanches"><i class="fas fa-chevron-right"></i> API</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Horário de Funcionamento</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-clock"></i> Segunda a Sexta: 11h-22h</li>
+                        <li><i class="fas fa-clock"></i> Sábado: 11h-23h</li>
+                        <li><i class="fas fa-clock"></i> Domingo: 12h-20h</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Rua dos Desenvolvedores, 123</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 DevBurger - Todos os direitos reservados | Desenvolvido com ❤️ e 🍔</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

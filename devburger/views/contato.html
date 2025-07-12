@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - DevBurger</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="/" class="logo">
+                <i class="fas fa-hamburger"></i>
+                DevBurger
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fas fa-utensils"></i> Cardápio</a></li>
+                    <li><a href="/sugestao"><i class="fas fa-lightbulb"></i> Sugerir Lanche</a></li>
+                    <li><a href="/contato"><i class="fas fa-envelope"></i> Contato</a></li>
+                    <li><a href="/api/lanches"><i class="fas fa-code"></i> API</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="form-section">
+        <div class="container">
+            <div class="form-container">
+                <h2 class="form-title">Entre em Contato</h2>
+                <p class="form-subtitle">Tem alguma dúvida, sugestão ou reclamação? Estamos aqui para ajudar!</p>
+                
+                <form action="/contato-enviado" method="POST">
+                    <div class="form-group">
+                        <label for="contato-nome">Nome:</label>
+                        <input type="text" id="contato-nome" name="nome" required placeholder="Seu nome completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="contato-email">Email:</label>
+                        <input type="email" id="contato-email" name="email" required placeholder="seu.email@exemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="contato-assunto">Assunto:</label>
+                        <input type="text" id="contato-assunto" name="assunto" required placeholder="Motivo do contato">
+                    </div>
+                    <div class="form-group">
+                        <label for="contato-mensagem">Mensagem:</label>
+                        <textarea id="contato-mensagem" name="mensagem" required placeholder="Sua mensagem..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-block">Enviar mensagem</button>
+                </form>
+                
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Endereço</h4>
+                            <p>Rua dos Desenvolvedores, 123<br>Cidade Tech, SP</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Telefone</h4>
+                            <p>(11) 9999-8888</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>contato@devburger.com.br</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>DevBurger</h3>
+                    <p>Hamburgueria gourmet com ingredientes selecionados e sabores inovadores. Tudo feito na hora para você!</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="/"><i class="fas fa-chevron-right"></i> Cardápio</a></li>
+                        <li><a href="/sugestao"><i class="fas fa-chevron-right"></i> Sugerir Lanche</a></li>
+                        <li><a href="/contato"><i class="fas fa-chevron-right"></i> Contato</a></li>
+                        <li><a href="/api/lanches"><i class="fas fa-chevron-right"></i> API</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Horário de Funcionamento</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-clock"></i> Segunda a Sexta: 11h-22h</li>
+                        <li><i class="fas fa-clock"></i> Sábado: 11h-23h</li>
+                        <li><i class="fas fa-clock"></i> Domingo: 12h-20h</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Rua dos Desenvolvedores, 123</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 DevBurger - Todos os direitos reservados | Desenvolvido com ❤️ e 🍔</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
