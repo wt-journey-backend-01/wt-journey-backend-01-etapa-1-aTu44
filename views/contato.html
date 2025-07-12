@@ -18,7 +18,7 @@
                 <ul>
                     <li><a href="/"><i class="fas fa-utensils"></i> Cardápio</a></li>
                     <li><a href="/sugestao"><i class="fas fa-lightbulb"></i> Sugerir Lanche</a></li>
-                    <li><a href="/contato"><i class="fas fa-envelope"></i> Contato</a></li>
+                    <li><a href="/contato" class="active"><i class="fas fa-envelope"></i> Contato</a></li>
                     <li><a href="/api/lanches"><i class="fas fa-code"></i> API</a></li>
                 </ul>
             </nav>
@@ -31,7 +31,13 @@
                 <h2 class="form-title">Entre em Contato</h2>
                 <p class="form-subtitle">Tem alguma dúvida, sugestão ou reclamação? Estamos aqui para ajudar!</p>
                 
-                <form action="/contato-enviado" method="POST">
+                <% if (error) { %>
+                    <div class="mensagem-erro">
+                        <i class="fas fa-exclamation-circle"></i> <%= error %>
+                    </div>
+                <% } %>
+                
+                <form action="/contato" method="POST">
                     <div class="form-group">
                         <label for="contato-nome">Nome:</label>
                         <input type="text" id="contato-nome" name="nome" required placeholder="Seu nome completo">
@@ -51,22 +57,22 @@
                     <button type="submit" class="btn btn-block">Enviar mensagem</button>
                 </form>
                 
-                <div class="contact-info">
-                    <div class="info-item">
+                <div class="info-contato">
+                    <div class="item-info">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h4>Endereço</h4>
                             <p>Rua dos Desenvolvedores, 123<br>Cidade Tech, SP</p>
                         </div>
                     </div>
-                    <div class="info-item">
+                    <div class="item-info">
                         <i class="fas fa-phone-alt"></i>
                         <div>
                             <h4>Telefone</h4>
                             <p>(11) 9999-8888</p>
                         </div>
                     </div>
-                    <div class="info-item">
+                    <div class="item-info">
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h4>Email</h4>

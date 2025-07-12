@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #e63946;
-            --primary-dark: #c1121f;
-            --dark: #1d3557;
-            --light: #f1faee;
-            --text-light: #aaa;
+            --Primaria: #e63946;
+            --PrimariaEscura: #c1121f;
+            --Escura: #1d3557;
+            --Clara: #f1faee;
+            --TextoClaro: #aaa;
         }
         
         .error-section {
@@ -35,7 +35,7 @@
         .error-code {
             font-size: 8rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--Primaria);
             margin-bottom: 1rem;
             text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
@@ -45,7 +45,7 @@
             margin-bottom: 1.5rem;
         }
         
-        .error-message {
+        .mensagem-erro {
             font-size: 1.2rem;
             margin-bottom: 2rem;
             max-width: 600px;
@@ -57,13 +57,17 @@
         .space-animation {
             font-size: 3rem;
             margin: 2rem 0;
+            animation: rotacionar 10s linear infinite;
         }
         
-     
+        @keyframes rotacionar {
+            0% { transform: rotate(0); }
+            100% { transform: rotate(360deg); }
+        }
         
         .btn {
             display: inline-block;
-            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            background: linear-gradient(to right, var(--Primaria), var(--PrimariaEscura));
             color: white;
             padding: 0.9rem 1.8rem;
             border: none;
@@ -108,7 +112,7 @@
         <div class="error-container">
             <div class="error-code">404</div>
             <h2 class="error-title">Página Não Encontrada</h2>
-            <p class="error-message">Ops! Parece que o hamburger que você está procurando foi devorado por um desenvolvedor faminto.</p>
+            <p class="mensagem-erro">Ops! Parece que o hamburger que você está procurando foi devorado por um desenvolvedor faminto.</p>
             
             <div class="space-animation">
                 <i class="fas fa-hamburger"></i>
@@ -116,7 +120,7 @@
                 <i class="fas fa-rocket"></i>
             </div>
             
-            <p class="error-message">Não se preocupe, você pode voltar à nossa página inicial e continuar sua jornada gastronômica.</p>
+            <p class="mensagem-erro">Não se preocupe, você pode voltar à nossa página inicial e continuar sua jornada gastronômica.</p>
             
             <a href="/" class="btn">Voltar ao Início</a>
         </div>

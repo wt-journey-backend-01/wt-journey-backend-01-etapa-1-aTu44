@@ -1,18 +1,16 @@
-/* Variáveis de cores */
 :root {
-    --primary: #e63946;
-    --primary-dark: #c1121f;
-    --secondary: #f4a261;
-    --dark: #1d3557;
-    --light: #f1faee;
-    --accent: #e9c46a;
-    --text: #333;
-    --text-light: #555;
-    --background: #fff;
-    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --Primaria: #e63946;
+    --PrimariaEscura: #c1121f;
+    --Secundaria: #f4a261;
+    --Escura: #1d3557;
+    --Clara: #f1faee;
+    --Destaque: #e9c46a;
+    --Texto: #333;
+    --TextoClaro: #555;
+    --Fundo: #fff;
+    --Sombra: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Reset e estilos gerais */
 * {
     margin: 0;
     padding: 0;
@@ -22,7 +20,7 @@
 
 body {
     background-color: #f8f9fa;
-    color: var(--text);
+    color: var(--Texto);
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
@@ -36,12 +34,11 @@ body {
     padding: 0 20px;
 }
 
-/* Header */
 header {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background: linear-gradient(135deg, var(--Primaria), var(--PrimariaEscura));
     color: white;
     padding: 1.5rem 0;
-    box-shadow: var(--shadow);
+    box-shadow: var(--Sombra);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -64,7 +61,7 @@ header {
 }
 
 .logo i {
-    color: var(--accent);
+    color: var(--Destaque);
 }
 
 nav ul {
@@ -91,7 +88,6 @@ nav ul li a.active {
     font-weight: 600;
 }
 
-/* Hero Section */
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1571091655789-405eb7a3a3a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
     background-size: cover;
@@ -113,16 +109,15 @@ nav ul li a.active {
     margin: 0 auto 2rem;
 }
 
-/* Cardápio */
 .cardapio-section {
     padding: 4rem 0;
-    background-color: var(--light);
+    background-color: var(--Clara);
 }
 
 .section-title {
     text-align: center;
     margin-bottom: 3rem;
-    color: var(--dark);
+    color: var(--Escura);
     font-size: 2.5rem;
     position: relative;
 }
@@ -132,12 +127,11 @@ nav ul li a.active {
     display: block;
     width: 80px;
     height: 4px;
-    background-color: var(--primary);
+    background-color: var(--Primaria);
     margin: 0.5rem auto;
     border-radius: 2px;
 }
 
-/* Filtros */
 .filtros {
     display: flex;
     flex-wrap: wrap;
@@ -147,9 +141,9 @@ nav ul li a.active {
 }
 
 .filtro-btn {
-    background: var(--light);
-    color: var(--dark);
-    border: 2px solid var(--primary);
+    background: var(--Clara);
+    color: var(--Escura);
+    border: 2px solid var(--Primaria);
     padding: 0.7rem 1.5rem;
     border-radius: 8px;
     cursor: pointer;
@@ -158,7 +152,7 @@ nav ul li a.active {
 }
 
 .filtro-btn:hover, .filtro-btn.active {
-    background: linear-gradient(to right, var(--primary), var(--primary-dark));
+    background: linear-gradient(to right, var(--Primaria), var(--PrimariaEscura));
     color: white;
 }
 
@@ -169,10 +163,10 @@ nav ul li a.active {
 }
 
 .lanche-card {
-    background-color: white;
+    background-color: var(--Fundo);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: var(--shadow);
+    box-shadow: var(--Sombra);
     transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
     flex-direction: column;
@@ -184,9 +178,8 @@ nav ul li a.active {
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Card de destaque */
 .lanche-card.destaque {
-    border: 2px solid var(--primary);
+    border: 2px solid var(--Primaria);
 }
 
 .lanche-card.destaque::before {
@@ -194,7 +187,7 @@ nav ul li a.active {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: var(--primary);
+    background: var(--Primaria);
     color: white;
     padding: 5px 10px;
     border-radius: 20px;
@@ -205,7 +198,7 @@ nav ul li a.active {
 
 .lanche-img {
     height: 200px;
-    background-color: var(--secondary);
+    background-color: var(--Secundaria);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -222,7 +215,7 @@ nav ul li a.active {
 }
 
 .lanche-info h3 {
-    color: var(--dark);
+    color: var(--Escura);
     margin-bottom: 0.5rem;
     font-size: 1.5rem;
     display: flex;
@@ -231,7 +224,7 @@ nav ul li a.active {
 
 .destaque-badge {
     display: inline-block;
-    background: var(--primary);
+    background: var(--Primaria);
     color: white;
     padding: 3px 8px;
     border-radius: 10px;
@@ -241,44 +234,43 @@ nav ul li a.active {
 }
 
 .lanche-info p {
-    color: var(--text-light);
+    color: var(--TextoClaro);
     margin-bottom: 1rem;
     flex-grow: 1;
 }
 
 .lanche-price {
-    color: var(--primary);
+    color: var(--Primaria);
     font-weight: 700;
     font-size: 1.3rem;
     margin-top: auto;
 }
 
-/* Formulários */
 .form-section {
     padding: 4rem 0;
-    background-color: white;
+    background-color: var(--Fundo);
 }
 
 .form-container {
     max-width: 700px;
     margin: 0 auto;
-    background: white;
+    background: var(--Fundo);
     padding: 2.5rem;
     border-radius: 12px;
-    box-shadow: var(--shadow);
+    box-shadow: var(--Sombra);
 }
 
 .form-title {
     text-align: center;
     margin-bottom: 1.5rem;
-    color: var(--dark);
+    color: var(--Escura);
     font-size: 2rem;
 }
 
 .form-subtitle {
     text-align: center;
     margin-bottom: 2rem;
-    color: var(--text-light);
+    color: var(--TextoClaro);
     font-size: 1.1rem;
 }
 
@@ -290,7 +282,7 @@ nav ul li a.active {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
-    color: var(--dark);
+    color: var(--Escura);
 }
 
 .form-group input,
@@ -307,7 +299,7 @@ nav ul li a.active {
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-    border-color: var(--primary);
+    border-color: var(--Primaria);
     outline: none;
     box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2);
 }
@@ -319,7 +311,7 @@ nav ul li a.active {
 
 .btn {
     display: inline-block;
-    background: linear-gradient(to right, var(--primary), var(--primary-dark));
+    background: linear-gradient(to right, var(--Primaria), var(--PrimariaEscura));
     color: white;
     padding: 0.9rem 1.8rem;
     border: none;
@@ -349,17 +341,16 @@ nav ul li a.active {
 
 .btn-outline {
     background: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary);
+    border: 2px solid var(--Primaria);
+    color: var(--Primaria);
     box-shadow: none;
 }
 
 .btn-outline:hover {
-    background: var(--primary);
+    background: var(--Primaria);
     color: white;
 }
 
-/* Form footer */
 .form-footer {
     margin-top: 2rem;
     text-align: center;
@@ -369,7 +360,6 @@ nav ul li a.active {
     margin-bottom: 1rem;
 }
 
-/* Contact info */
 .contact-info {
     margin-top: 2rem;
     border-top: 1px solid #eee;
@@ -384,18 +374,17 @@ nav ul li a.active {
 
 .info-item i {
     font-size: 1.5rem;
-    color: var(--primary);
+    color: var(--Primaria);
     margin-top: 5px;
 }
 
 .info-item h4 {
     margin-bottom: 0.3rem;
-    color: var(--dark);
+    color: var(--Escura);
 }
 
-/* Footer */
 footer {
-    background-color: var(--dark);
+    background-color: var(--Escura);
     color: white;
     padding: 3rem 0 1.5rem;
     margin-top: auto;
@@ -422,7 +411,7 @@ footer {
     left: 0;
     width: 50px;
     height: 3px;
-    background-color: var(--primary);
+    background-color: var(--Primaria);
 }
 
 .footer-links {
@@ -466,7 +455,7 @@ footer {
 }
 
 .social-links a:hover {
-    background-color: var(--primary);
+    background-color: var(--Primaria);
     transform: translateY(-3px);
 }
 
@@ -478,7 +467,6 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Mensagens de erro */
 .error-message {
     background-color: #ffecec;
     color: #e63946;
@@ -495,16 +483,15 @@ footer {
     font-size: 1.2rem;
 }
 
-/* Botão de contorno */
 .btn-outline {
     background: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary);
+    border: 2px solid var(--Primaria);
+    color: var(--Primaria);
     box-shadow: none;
 }
 
 .btn-outline:hover {
-    background: var(--primary);
+    background: var(--Primaria);
     color: white;
 }
 
@@ -516,17 +503,16 @@ footer {
 .form-footer p {
     margin-bottom: 1rem;
     font-size: 0.9rem;
-    color: var(--text-light);
+    color: var(--TextoClaro);
 }
 
-/* Estilos para a página de agradecimento */
 .thank-you-section {
     min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 4rem 0;
-    background: linear-gradient(135deg, var(--light), white);
+    background: linear-gradient(135deg, var(--Clara), white);
 }
 
 .thank-you-container {
@@ -536,12 +522,12 @@ footer {
     padding: 3rem;
     background: white;
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--Sombra);
 }
 
 .thank-you-icon {
     font-size: 5rem;
-    color: var(--primary);
+    color: var(--Primaria);
     margin-bottom: 1.5rem;
     animation: bounce 1s ease infinite;
 }
@@ -552,7 +538,7 @@ footer {
 }
 
 .thank-you-title {
-    color: var(--primary);
+    color: var(--Primaria);
     margin-bottom: 1.5rem;
     font-size: 2.5rem;
 }
@@ -565,7 +551,7 @@ footer {
 }
 
 .thank-you-details {
-    background-color: var(--light);
+    background-color: var(--Clara);
     padding: 1.5rem;
     border-radius: 10px;
     margin-bottom: 2rem;
@@ -580,19 +566,17 @@ footer {
 .detail-label {
     font-weight: 600;
     width: 120px;
-    color: var(--dark);
+    color: var(--Escura);
 }
 
-/* Mensagens de erro e sem resultados */
 .erro-api, .sem-resultados {
     text-align: center;
     padding: 2rem;
     font-size: 1.2rem;
-    color: var(--text-light);
+    color: var(--TextoClaro);
     grid-column: 1 / -1;
 }
 
-/* Página de erro 404 */
 .error-section {
     min-height: 80vh;
     display: flex;
@@ -613,7 +597,7 @@ footer {
 .error-code {
     font-size: 8rem;
     font-weight: 800;
-    color: var(--primary);
+    color: var(--Primaria);
     margin-bottom: 1rem;
     text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
@@ -637,6 +621,7 @@ footer {
     margin: 2rem 0;
     animation: rotate 10s linear infinite;
 }
+
 .error-message {
     background-color: #ffecec;
     color: #e63946;
@@ -653,7 +638,6 @@ footer {
     font-size: 1.2rem;
 }
 
-/* Mensagens de sucesso */
 .success-message {
     background-color: #e6f7ee;
     color: #2e7d32;
@@ -675,7 +659,6 @@ footer {
     100% { transform: rotate(360deg); }
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
     .header-container {
         flex-direction: column;
@@ -748,5 +731,4 @@ footer {
         width: 100%;
         margin-bottom: 5px;
     }
-
 }

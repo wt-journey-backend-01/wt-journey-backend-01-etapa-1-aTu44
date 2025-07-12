@@ -10,6 +10,16 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 
+// Função para escapar HTML (prevenção XSS)
+const escapeHtml = (text) => {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+};
+
 // Rotas
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
@@ -18,7 +28,6 @@ app.get('/', (req, res) => {
 app.get('/sugestao', (req, res) => {
     const { error, nome, ingredientes, success } = req.query;
     
-    // Ler o arquivo HTML
     fs.readFile(path.join(__dirname, 'views', 'sugestao.html'), 'utf8', (err, html) => {
         if (err) {
             return res.status(500).send('Erro ao carregar a página');
@@ -30,26 +39,29 @@ app.get('/sugestao', (req, res) => {
         // Mensagem de sucesso
         if (success) {
             finalHtml = finalHtml.replace(
-                '<!-- SUCCESS_MESSAGE_PLACEHOLDER -->',
-                '<div class="success-message"><i class="fas fa-check-circle"></i> Sugestão enviada com sucesso! Obrigado pela contribuição.</div>'
+                '<!-- MARCADOR_MENSAGEM_SUCESSO -->',
+                '<div class="mensagem-sucesso"><i class="fas fa-check-circle"></i> Sugestão enviada com sucesso! Obrigado pela contribuição.</div>'
             );
         } else {
-            finalHtml = finalHtml.replace('<!-- SUCCESS_MESSAGE_PLACEHOLDER -->', '');
+            finalHtml = finalHtml.replace('<!-- MARCADOR_MENSAGEM_SUCESSO -->', '');
         }
         
         // Mensagem de erro
         if (error) {
             finalHtml = finalHtml.replace(
-                '<!-- ERROR_MESSAGE_PLACEHOLDER -->',
-                `<div class="error-message"><i class="fas fa-exclamation-circle"></i> ${decodeURIComponent(error)}</div>`
+                '<!-- MARCADOR_MENSAGEM_ERRO -->',
+                `<div class="mensagem-erro"><i class="fas fa-exclamation-circle"></i> ${escapeHtml(decodeURIComponent(error))}</div>`
             );
         } else {
-            finalHtml = finalHtml.replace('<!-- ERROR_MESSAGE_PLACEHOLDER -->', '');
+            finalHtml = finalHtml.replace('<!-- MARCADOR_MENSAGEM_ERRO -->', '');
         }
         
         // Preencher campos
-        finalHtml = finalHtml.replace('value=""', `value="${nome || ''}"`);
-        finalHtml = finalHtml.replace('</textarea>', `${ingredientes || ''}</textarea>`);
+        const nomeSeguro = escapeHtml(nome || '');
+        const ingredientesSeguro = escapeHtml(ingredientes || '');
+        
+        finalHtml = finalHtml.replace('id="nome-lanche" value=""', `id="nome-lanche" value="${nomeSeguro}"`);
+        finalHtml = finalHtml.replace('id="ingredientes-lanche"></textarea>', `id="ingredientes-lanche">${ingredientesSeguro}</textarea>`);
         
         res.send(finalHtml);
     });
@@ -71,7 +83,7 @@ app.get('/contato', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'contato.html'));
 });
 
-app.post('/contato-enviado', (req, res) => {
+app.post('/contato', (req, res) => {
     const { nome, email, assunto, mensagem } = req.body;
     
     // Verifica se os campos estão preenchidos
@@ -94,40 +106,47 @@ app.post('/contato-enviado', (req, res) => {
             </style>
         </head>
         <body>
-            <section class="thank-you-section">
-                <div class="thank-you-container">
-                    <div class="thank-you-icon">
+            <section class="secao-agradecimento">
+                <div class="container-agradecimento">
+                    <div class="icone-agradecimento">
                         <i class="fas fa-check-circle"></i>
                     </div>
-                    <h2 class="thank-you-title">Mensagem Enviada!</h2>
-                    <p class="thank-you-message">Obrigado por entrar em contato com a DevBurger! Responderemos em breve.</p>
+                    <h2 class="titulo-agradecimento">Mensagem Enviada!</h2>
+                    <p class="mensagem-agradecimento">Obrigado por entrar em contato com a DevBurger! Responderemos em breve.</p>
                     
-                    <div class="thank-you-details">
-                        <div class="detail-item">
-                            <span class="detail-label">Nome:</span>
-                            <span>${nome}</span>
+                    <div class="detalhes-agradecimento">
+                        <div class="item-detalhe">
+                            <span class="rotulo-detalhe">Nome:</span>
+                            <span>${escapeHtml(nome)}</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Email:</span>
-                            <span>${email}</span>
+                        <div class="item-detalhe">
+                            <span class="rotulo-detalhe">Email:</span>
+                            <span>${escapeHtml(email)}</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Assunto:</span>
-                            <span>${assunto}</span>
+                        <div class="item-detalhe">
+                            <span class="rotulo-detalhe">Assunto:</span>
+                            <span>${escapeHtml(assunto)}</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Mensagem:</span>
-                            <span>${mensagem}</span>
+                        <div class="item-detalhe">
+                            <span class="rotulo-detalhe">Mensagem:</span>
+                            <span>${escapeHtml(mensagem)}</span>
                         </div>
                     </div>
                     
-                    <a href="/" class="btn">Voltar ao Cardápio</a>
+                    <a href="/" class="botao">Voltar ao Cardápio</a>
                 </div>
             </section>
         </body>
         </html>
     `;
-    res.send(html);
+    
+    // Configura o cabeçalho corretamente
+    res.writeHead(200, {
+        'Content-Type': 'text/html',
+        'Content-Length': Buffer.byteLength(html)
+    });
+    
+    res.end(html);
 });
 
 app.get('/api/lanches', (req, res) => {
