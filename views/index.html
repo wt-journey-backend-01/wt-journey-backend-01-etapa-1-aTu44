@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevBurger - Cardápio</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Cardápio - DevBurger</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Estilos gerais */
@@ -21,11 +20,20 @@
             --Sombra: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             background-color: #f8f9fa;
             color: var(--Texto);
             line-height: 1.6;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         
         .container {
@@ -79,6 +87,9 @@
             transition: all 0.3s;
             padding: 8px 12px;
             border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         navegacao ul li a:hover {
@@ -98,6 +109,7 @@
             color: white;
             padding: 5rem 0;
             text-align: center;
+            flex-grow: 1;
         }
         
         .hero h1 {
@@ -137,6 +149,7 @@
         .secao-cardapio {
             padding: 4rem 0;
             background-color: var(--Clara);
+            flex-grow: 1;
         }
         
         .titulo-secao {
@@ -211,6 +224,9 @@
             overflow: hidden;
             box-shadow: var(--Sombra);
             transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .lanche-card:hover {
@@ -218,17 +234,30 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
         
+        /* ESTILOS PARA AS IMAGENS ADICIONADAS */
         .lanche-img {
             height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .lanche-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .lanche-card:hover .lanche-img img {
+            transform: scale(1.1);
         }
         
         .lanche-info {
             padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .lanche-info h3 {
@@ -253,12 +282,14 @@
         .lanche-info p {
             color: var(--TextoClaro);
             margin-bottom: 1rem;
+            flex-grow: 1;
         }
         
         .lanche-preco {
             color: var(--Primaria);
             font-weight: 700;
             font-size: 1.3rem;
+            margin-top: auto;
         }
         
         /* Animação de destaque nos cards */
@@ -282,130 +313,34 @@
             z-index: 2;
         }
         
-        /* Separador */
-        .separador {
-            position: relative;
-            margin: 4rem 0;
+        /* Botão para página de sugestão */
+        .link-sugestao {
             text-align: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            background: rgba(230, 57, 70, 0.05);
+            border-radius: 12px;
         }
         
-        .separador::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--Primaria), transparent);
-            z-index: 1;
-        }
-        
-        .separador-texto {
-            position: relative;
-            display: inline-block;
-            background: var(--Clara);
-            padding: 0 20px;
-            z-index: 2;
-            font-size: 1.5rem;
-            color: var(--Primaria);
-            font-weight: 600;
-        }
-        
-        .separador-texto i {
-            margin-right: 10px;
-            color: var(--Destaque);
-        }
-        
-        /* Formulário de sugestão */
-        .container-formulario {
-            background: var(--Fundo);
-            border: 1px solid rgba(230, 57, 70, 0.2);
-            border-radius: 15px;
-            padding: 2.5rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-        }
-        
-        .titulo-formulario {
-            color: var(--Primaria);
-            position: relative;
-            padding-bottom: 15px;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-        }
-        
-        .titulo-formulario::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--Destaque);
-            border-radius: 2px;
-        }
-        
-        .subtitulo-formulario {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--TextoClaro);
-            font-size: 1.1rem;
-        }
-        
-        .grupo-formulario {
-            margin-bottom: 1.5rem;
-        }
-        
-        .grupo-formulario label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
+        .link-sugestao h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
             color: var(--Escura);
         }
         
-        .grupo-formulario input,
-        .grupo-formulario textarea {
-            width: 100%;
-            padding: 0.9rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
+        .link-sugestao p {
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            color: var(--TextoClaro);
         }
         
-        .grupo-formulario input:focus,
-        .grupo-formulario textarea:focus {
-            border-color: var(--Primaria);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2);
-        }
-        
-        .grupo-formulario textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .botao-bloco {
-            display: block;
-            width: 100%;
-            padding: 1rem;
-            font-size: 1.1rem;
+        .botao-grande {
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
         }
         
         .botao i {
             margin-right: 8px;
-        }
-        
-        .rodape-formulario {
-            margin-top: 2rem;
-            text-align: center;
-        }
-        
-        .rodape-formulario p {
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: var(--TextoClaro);
         }
         
         /* Rodapé */
@@ -413,7 +348,7 @@
             background-color: var(--Escura);
             color: white;
             padding: 3rem 0 1.5rem;
-            margin-top: 2rem;
+            margin-top: auto;
         }
         
         .container-rodape {
@@ -493,6 +428,27 @@
             font-size: 0.9rem;
         }
         
+        /* Botão de contorno */
+        .botao-contorno {
+            display: inline-block;
+            background: transparent;
+            color: var(--Primaria);
+            padding: 0.9rem 1.8rem;
+            border: 2px solid var(--Primaria);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .botao-contorno:hover {
+            background: var(--Primaria);
+            color: white;
+        }
+        
         /* Responsividade */
         @media (max-width: 768px) {
             .container-cabecalho {
@@ -512,19 +468,29 @@
             .titulo-secao {
                 font-size: 2rem;
             }
+            
+            .container-lanches {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
         }
         
         @media (max-width: 480px) {
-            .container-formulario {
-                padding: 1.5rem;
-            }
-        
             .hero {
                 padding: 3rem 0;
             }
         
             .hero h1 {
                 font-size: 1.8rem;
+            }
+            
+            .filtros {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filtro-botao {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -539,7 +505,7 @@
             </a>
             <navegacao>
                 <ul>
-                    <li><a href="#cardapio" class="ativo"><i class="fas fa-utensils"></i> Cardápio</a></li>
+                    <li><a href="/" class="ativo"><i class="fas fa-utensils"></i> Cardápio</a></li>
                     <li><a href="/sugestao"><i class="fas fa-lightbulb"></i> Sugerir Lanche</a></li>
                     <li><a href="/contato"><i class="fas fa-envelope"></i> Contato</a></li>
                     <li><a href="/api/lanches"><i class="fas fa-code"></i> API</a></li>
@@ -557,7 +523,7 @@
         </div>
     </section>
 
-    <!-- Cardápio -->
+    <!-- Cardápio com imagens -->
     <section id="cardapio" class="secao-cardapio">
         <div class="container">
             <h2 class="titulo-secao">Nosso Cardápio</h2>
@@ -584,8 +550,8 @@
             <div class="container-lanches">
                 <!-- Item 1 -->
                 <div class="lanche-card destaque" data-categoria="carne destaque">
-                    <div class="lanche-img" style="background-color: #e9c46a;">
-                        <i class="fas fa-burger"></i>
+                    <div class="lanche-img">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Classic DevBurger">
                     </div>
                     <div class="lanche-info">
                         <h3>Classic DevBurger <span class="destaque-badge">Destaque</span></h3>
@@ -596,8 +562,8 @@
                 
                 <!-- Item 2 -->
                 <div class="lanche-card" data-categoria="frango">
-                    <div class="lanche-img" style="background-color: #f4a261;">
-                        <i class="fas fa-drumstick-bite"></i>
+                    <div class="lanche-img">
+                        <img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Chicken Code">
                     </div>
                     <div class="lanche-info">
                         <h3>Chicken Code</h3>
@@ -608,8 +574,8 @@
                 
                 <!-- Item 3 -->
                 <div class="lanche-card" data-categoria="vegetariano">
-                    <div class="lanche-img" style="background-color: #2a9d8f;">
-                        <i class="fas fa-seedling"></i>
+                    <div class="lanche-img">
+                        <img src="https://images.unsplash.com/photo-1550317138-10000687a72b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Green Byte">
                     </div>
                     <div class="lanche-info">
                         <h3>Green Byte</h3>
@@ -620,8 +586,8 @@
                 
                 <!-- Item 4 -->
                 <div class="lanche-card destaque" data-categoria="carne destaque">
-                    <div class="lanche-img" style="background-color: #e76f51;">
-                        <i class="fas fa-bacon"></i>
+                    <div class="lanche-img">
+                        <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bacon Overflow">
                     </div>
                     <div class="lanche-info">
                         <h3>Bacon Overflow <span class="destaque-badge">Destaque</span></h3>
@@ -632,8 +598,8 @@
                 
                 <!-- Item 5 -->
                 <div class="lanche-card" data-categoria="frango">
-                    <div class="lanche-img" style="background-color: #e9c46a;">
-                        <i class="fas fa-pepper-hot"></i>
+                    <div class="lanche-img">
+                        <img src="https://images.unsplash.com/photo-1603064752734-4c48eff53d05?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Spicy Chicken">
                     </div>
                     <div class="lanche-info">
                         <h3>Spicy Chicken</h3>
@@ -644,8 +610,8 @@
                 
                 <!-- Item 6 -->
                 <div class="lanche-card destaque" data-categoria="vegetariano destaque">
-                    <div class="lanche-img" style="background-color: #2a9d8f;">
-                        <i class="fas fa-cheese"></i>
+                    <div class="lanche-img">
+                        <img src="https://images.unsplash.com/photo-1596662951482-0c4ba74a6df6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mushroom Paradise">
                     </div>
                     <div class="lanche-info">
                         <h3>Mushroom Paradise <span class="destaque-badge">Destaque</span></h3>
@@ -655,36 +621,13 @@
                 </div>
             </div>
             
-            <!-- Separador visual -->
-            <div class="separador">
-                <div class="separador-texto">
-                    <i class="fas fa-lightbulb"></i> Tem uma ideia incrível?
-                </div>
-            </div>
-            
-            <!-- Formulário de sugestão -->
-            <div class="container-formulario">
-                <h2 class="titulo-formulario">Sugira um novo lanche!</h2>
-                <p class="subtitulo-formulario">Quer ver sua criação no nosso cardápio? Compartilhe com a gente!</p>
-                
-                <form id="form-rapido" action="/sugestao-enviada" method="POST">
-                    <div class="grupo-formulario">
-                        <label for="nome-rapido">Nome do lanche:</label>
-                        <input type="text" id="nome-rapido" name="nome" required placeholder="Ex: Burger de Frango">
-                    </div>
-                    <div class="grupo-formulario">
-                        <label for="ingredientes-rapido">Ingredientes:</label>
-                        <textarea id="ingredientes-rapido" name="ingredientes" required 
-                                  placeholder="Descreva os ingredientes..."></textarea>
-                    </div>
-                    <button type="submit" class="botao botao-bloco">
-                        <i class="fas fa-paper-plane"></i> Enviar sugestão
-                    </button>
-                </form>
-                
-                <div class="rodape-formulario">
-                    <p>As melhores sugestões podem virar parte do nosso cardápio permanente!</p>
-                </div>
+            <!-- Link para página de sugestão -->
+            <div class="link-sugestao">
+                <h3>Tem uma ideia incrível para um novo hambúrguer?</h3>
+                <p>Compartilhe sua criação com a gente e ela pode entrar no nosso cardápio!</p>
+                <a href="/sugestao" class="botao botao-grande">
+                    <i class="fas fa-lightbulb"></i> Sugerir um Lanche
+                </a>
             </div>
         </div>
     </section>
