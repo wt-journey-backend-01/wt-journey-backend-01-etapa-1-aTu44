@@ -56,12 +56,21 @@ app.get('/sugestao', (req, res) => {
             finalHtml = finalHtml.replace('<!-- MARCADOR_MENSAGEM_ERRO -->', '');
         }
         
-        // Preencher campos
+        // Preencher campo de nome
         const nomeSeguro = escapeHtml(nome || '');
         const ingredientesSeguro = escapeHtml(ingredientes || '');
         
-        finalHtml = finalHtml.replace('id="nome-lanche" value=""', `id="nome-lanche" value="${nomeSeguro}"`);
-        finalHtml = finalHtml.replace('id="ingredientes-lanche"></textarea>', `id="ingredientes-lanche">${ingredientesSeguro}</textarea>`);
+        // Preencher campo de nome usando regex
+        finalHtml = finalHtml.replace(
+            /(<input[^>]*id="nome-lanche"[^>]*value=")[^"]*(")/,
+            `$1${nomeSeguro}$2`
+        );
+        
+        // Preencher campo de ingredientes usando regex
+        finalHtml = finalHtml.replace(
+            /(<textarea[^>]*id="ingredientes-lanche"[^>]*>)[^<]*(<\/textarea>)/,
+            `$1${ingredientesSeguro}$2`
+        );
         
         res.send(finalHtml);
     });
