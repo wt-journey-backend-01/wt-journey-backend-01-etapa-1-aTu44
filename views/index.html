@@ -313,34 +313,130 @@
             z-index: 2;
         }
         
-        /* Botão para página de sugestão */
-        .link-sugestao {
+        /* Separador */
+        .separador {
+            position: relative;
+            margin: 4rem 0;
             text-align: center;
-            margin-top: 3rem;
-            padding: 2rem 0;
-            background: rgba(230, 57, 70, 0.05);
-            border-radius: 12px;
         }
         
-        .link-sugestao h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
+        .separador::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--Primaria), transparent);
+            z-index: 1;
+        }
+        
+        .separador-texto {
+            position: relative;
+            display: inline-block;
+            background: var(--Clara);
+            padding: 0 20px;
+            z-index: 2;
+            font-size: 1.5rem;
+            color: var(--Primaria);
+            font-weight: 600;
+        }
+        
+        .separador-texto i {
+            margin-right: 10px;
+            color: var(--Destaque);
+        }
+        
+        /* Formulário de sugestão */
+        .container-formulario {
+            background: var(--Fundo);
+            border: 1px solid rgba(230, 57, 70, 0.2);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .titulo-formulario {
+            color: var(--Primaria);
+            position: relative;
+            padding-bottom: 15px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .titulo-formulario::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--Destaque);
+            border-radius: 2px;
+        }
+        
+        .subtitulo-formulario {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--TextoClaro);
+            font-size: 1.1rem;
+        }
+        
+        .grupo-formulario {
+            margin-bottom: 1.5rem;
+        }
+        
+        .grupo-formulario label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
             color: var(--Escura);
         }
         
-        .link-sugestao p {
-            max-width: 600px;
-            margin: 0 auto 1.5rem;
-            color: var(--TextoClaro);
+        .grupo-formulario input,
+        .grupo-formulario textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
         }
         
-        .botao-grande {
-            padding: 1rem 2.5rem;
-            font-size: 1.2rem;
+        .grupo-formulario input:focus,
+        .grupo-formulario textarea:focus {
+            border-color: var(--Primaria);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2);
+        }
+        
+        .grupo-formulario textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .botao-bloco {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
         }
         
         .botao i {
             margin-right: 8px;
+        }
+        
+        .rodape-formulario {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .rodape-formulario p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--TextoClaro);
         }
         
         /* Rodapé */
@@ -348,7 +444,7 @@
             background-color: var(--Escura);
             color: white;
             padding: 3rem 0 1.5rem;
-            margin-top: auto;
+            margin-top: 2rem;
         }
         
         .container-rodape {
@@ -475,6 +571,10 @@
         }
         
         @media (max-width: 480px) {
+            .container-formulario {
+                padding: 1.5rem;
+            }
+        
             .hero {
                 padding: 3rem 0;
             }
@@ -621,13 +721,41 @@
                 </div>
             </div>
             
-            <!-- Link para página de sugestão -->
-            <div class="link-sugestao">
-                <h3>Tem uma ideia incrível para um novo hambúrguer?</h3>
-                <p>Compartilhe sua criação com a gente e ela pode entrar no nosso cardápio!</p>
-                <a href="/sugestao" class="botao botao-grande">
-                    <i class="fas fa-lightbulb"></i> Sugerir um Lanche
-                </a>
+            <!-- Separador visual -->
+            <div class="separador">
+                <div class="separador-texto">
+                    <i class="fas fa-lightbulb"></i> Tem uma ideia incrível?
+                </div>
+            </div>
+            
+            <!-- Formulário de sugestão -->
+            <div class="container-formulario">
+                <h2 class="titulo-formulario">Sugira um novo lanche!</h2>
+                <p class="subtitulo-formulario">Quer ver sua criação no nosso cardápio? Compartilhe com a gente!</p>
+                
+                <form id="form-rapido" action="/sugestao-enviada" method="POST">
+                    <div class="grupo-formulario">
+                        <label for="nome-rapido">Nome do lanche:</label>
+                        <input type="text" id="nome-rapido" name="nome" required placeholder="Ex: Burger de Frango">
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="ingredientes-rapido">Ingredientes:</label>
+                        <textarea id="ingredientes-rapido" name="ingredientes" required 
+                                  placeholder="Descreva os ingredientes..."></textarea>
+                    </div>
+                    <div class="grupo-formulario">
+                        <label for="imagem-rapido">URL da imagem (opcional):</label>
+                        <input type="text" id="imagem-rapido" name="imagem" placeholder="Cole o link de uma imagem">
+                    </div>
+                    <button type="submit" class="botao botao-bloco">
+                        <i class="fas fa-paper-plane"></i> Enviar sugestão
+                    </button>
+                </form>
+                
+                <div class="rodape-formulario">
+                    <p>As melhores sugestões podem virar parte do nosso cardápio permanente!</p>
+                    <a href="/sugestao" class="botao-contorno"><i class="fas fa-lightbulb"></i> Ver mais detalhes</a>
+                </div>
             </div>
         </div>
     </section>
@@ -731,6 +859,19 @@
                         behavior: 'smooth'
                     });
                 });
+            });
+            
+            // Formulário de envio
+            const form = document.getElementById('form-rapido');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulação de envio
+                const nome = document.getElementById('nome-rapido').value;
+                alert(`Obrigado pela sua sugestão, ${nome}! Seu lanche será avaliado pela nossa equipe.`);
+                
+                // Reset do formulário
+                form.reset();
             });
         });
     </script>
