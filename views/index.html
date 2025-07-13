@@ -6,25 +6,547 @@
     <title>DevBurger - Cardápio</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos gerais */
+        :root {
+            --Primaria: #e63946;
+            --PrimariaEscura: #c1121f;
+            --Secundaria: #f4a261;
+            --Escura: #1d3557;
+            --Clara: #f1faee;
+            --Destaque: #e9c46a;
+            --Texto: #333;
+            --TextoClaro: #555;
+            --Fundo: #fff;
+            --Sombra: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--Texto);
+            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Cabeçalho */
+        cabecalho {
+            background: linear-gradient(135deg, var(--Primaria), var(--PrimariaEscura));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--Sombra);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container-cabecalho {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .logo i {
+            color: var(--Destaque);
+        }
+        
+        navegacao ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        navegacao ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        
+        navegacao ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        navegacao ul li a.ativo {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1571091655789-405eb7a3a3a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .botao {
+            display: inline-block;
+            background: linear-gradient(to right, var(--Primaria), var(--PrimariaEscura));
+            color: white;
+            padding: 0.9rem 1.8rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+        }
+        
+        .botao:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(230, 57, 70, 0.4);
+        }
+        
+        /* Cardápio */
+        .secao-cardapio {
+            padding: 4rem 0;
+            background-color: var(--Clara);
+        }
+        
+        .titulo-secao {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--Escura);
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .titulo-secao::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--Primaria);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+        
+        /* Filtros */
+        .filtros {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        
+        .filtro-botao {
+            background: var(--Clara);
+            color: var(--Escura);
+            border: 2px solid var(--Primaria);
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .filtro-botao:hover {
+            background: var(--Primaria);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .filtro-botao.ativo {
+            background: linear-gradient(to right, var(--Primaria), var(--PrimariaEscura));
+            color: white;
+            border-color: var(--PrimariaEscura);
+            box-shadow: 0 4px 8px rgba(230, 57, 70, 0.3);
+        }
+        
+        .filtro-botao i {
+            font-size: 1.1rem;
+        }
+        
+        /* Container de lanches */
+        .container-lanches {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .lanche-card {
+            background-color: var(--Fundo);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--Sombra);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .lanche-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .lanche-img {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .lanche-info {
+            padding: 1.5rem;
+        }
+        
+        .lanche-info h3 {
+            color: var(--Escura);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .destaque-badge {
+            display: inline-block;
+            background: var(--Primaria);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+        
+        .lanche-info p {
+            color: var(--TextoClaro);
+            margin-bottom: 1rem;
+        }
+        
+        .lanche-preco {
+            color: var(--Primaria);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        
+        /* Animação de destaque nos cards */
+        .lanche-card.destaque {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--Primaria);
+        }
+        
+        .lanche-card.destaque::before {
+            content: '★ Destaque';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--Primaria);
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 0.9rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        /* Separador */
+        .separador {
+            position: relative;
+            margin: 4rem 0;
+            text-align: center;
+        }
+        
+        .separador::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--Primaria), transparent);
+            z-index: 1;
+        }
+        
+        .separador-texto {
+            position: relative;
+            display: inline-block;
+            background: var(--Clara);
+            padding: 0 20px;
+            z-index: 2;
+            font-size: 1.5rem;
+            color: var(--Primaria);
+            font-weight: 600;
+        }
+        
+        .separador-texto i {
+            margin-right: 10px;
+            color: var(--Destaque);
+        }
+        
+        /* Formulário de sugestão */
+        .container-formulario {
+            background: var(--Fundo);
+            border: 1px solid rgba(230, 57, 70, 0.2);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .titulo-formulario {
+            color: var(--Primaria);
+            position: relative;
+            padding-bottom: 15px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .titulo-formulario::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--Destaque);
+            border-radius: 2px;
+        }
+        
+        .subtitulo-formulario {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--TextoClaro);
+            font-size: 1.1rem;
+        }
+        
+        .grupo-formulario {
+            margin-bottom: 1.5rem;
+        }
+        
+        .grupo-formulario label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--Escura);
+        }
+        
+        .grupo-formulario input,
+        .grupo-formulario textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .grupo-formulario input:focus,
+        .grupo-formulario textarea:focus {
+            border-color: var(--Primaria);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2);
+        }
+        
+        .grupo-formulario textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .botao-bloco {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .botao i {
+            margin-right: 8px;
+        }
+        
+        .rodape-formulario {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .rodape-formulario p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--TextoClaro);
+        }
+        
+        /* Rodapé */
+        rodape {
+            background-color: var(--Escura);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .container-rodape {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .coluna-rodape h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .coluna-rodape h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--Primaria);
+        }
+        
+        .links-rodape {
+            list-style: none;
+        }
+        
+        .links-rodape li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .links-rodape a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .links-rodape a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .links-sociais {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .links-sociais a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .links-sociais a:hover {
+            background-color: var(--Primaria);
+            transform: translateY(-3px);
+        }
+        
+        .rodape-inferior {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container-cabecalho {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        
+            navegacao ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        
+            .titulo-secao {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container-formulario {
+                padding: 1.5rem;
+            }
+        
+            .hero {
+                padding: 3rem 0;
+            }
+        
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Cabeçalho -->
-    <header>
+    <cabecalho>
         <div class="container container-cabecalho">
             <a href="/" class="logo">
                 <i class="fas fa-hamburger"></i>
                 DevBurger
             </a>
-            <nav>
+            <navegacao>
                 <ul>
                     <li><a href="#cardapio" class="ativo"><i class="fas fa-utensils"></i> Cardápio</a></li>
                     <li><a href="/sugestao"><i class="fas fa-lightbulb"></i> Sugerir Lanche</a></li>
                     <li><a href="/contato"><i class="fas fa-envelope"></i> Contato</a></li>
                     <li><a href="/api/lanches"><i class="fas fa-code"></i> API</a></li>
                 </ul>
-            </nav>
+            </navegacao>
         </div>
-    </header>
+    </cabecalho>
 
     <!-- Seção Hero -->
     <section class="hero">
@@ -39,13 +561,112 @@
     <section id="cardapio" class="secao-cardapio">
         <div class="container">
             <h2 class="titulo-secao">Nosso Cardápio</h2>
-            <div class="container-lanches">
-                <!-- ... (lanches permanecem iguais) ... -->
+            
+            <!-- Filtros com ícones -->
+            <div class="filtros">
+                <button class="filtro-botao ativo" data-categoria="todos">
+                    <i class="fas fa-burger"></i> Todos
+                </button>
+                <button class="filtro-botao" data-categoria="carne">
+                    <i class="fas fa-drumstick-bite"></i> Carne
+                </button>
+                <button class="filtro-botao" data-categoria="frango">
+                    <i class="fas fa-drumstick"></i> Frango
+                </button>
+                <button class="filtro-botao" data-categoria="vegetariano">
+                    <i class="fas fa-leaf"></i> Vegetariano
+                </button>
+                <button class="filtro-botao" data-categoria="destaque">
+                    <i class="fas fa-star"></i> Destaques
+                </button>
             </div>
             
-            <!-- Formulário na página inicial -->
-            <div class="container-formulario" style="margin-top: 3rem;">
-                <h2 class="titulo-formulario">Sugira um lanche rápido!</h2>
+            <div class="container-lanches">
+                <!-- Item 1 -->
+                <div class="lanche-card destaque" data-categoria="carne destaque">
+                    <div class="lanche-img" style="background-color: #e9c46a;">
+                        <i class="fas fa-burger"></i>
+                    </div>
+                    <div class="lanche-info">
+                        <h3>Classic DevBurger <span class="destaque-badge">Destaque</span></h3>
+                        <p>Pão brioche, hambúrguer 180g, queijo cheddar, alface, tomate, cebola roxa e molho especial.</p>
+                        <span class="lanche-preco">R$ 24,90</span>
+                    </div>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="lanche-card" data-categoria="frango">
+                    <div class="lanche-img" style="background-color: #f4a261;">
+                        <i class="fas fa-drumstick-bite"></i>
+                    </div>
+                    <div class="lanche-info">
+                        <h3>Chicken Code</h3>
+                        <p>Filé de frango empanado, pão australiano, queijo prato, alface, tomate e maionese de ervas.</p>
+                        <span class="lanche-preco">R$ 22,50</span>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="lanche-card" data-categoria="vegetariano">
+                    <div class="lanche-img" style="background-color: #2a9d8f;">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="lanche-info">
+                        <h3>Green Byte</h3>
+                        <p>Hambúrguer de grão-de-bico, pão integral, queijo vegano, rúcula, tomate seco e maionese de abacate.</p>
+                        <span class="lanche-preco">R$ 26,90</span>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="lanche-card destaque" data-categoria="carne destaque">
+                    <div class="lanche-img" style="background-color: #e76f51;">
+                        <i class="fas fa-bacon"></i>
+                    </div>
+                    <div class="lanche-info">
+                        <h3>Bacon Overflow <span class="destaque-badge">Destaque</span></h3>
+                        <p>Dois hambúrgueres, queijo cheddar, bacon crocante, cebola caramelizada e molho barbecue.</p>
+                        <span class="lanche-preco">R$ 29,90</span>
+                    </div>
+                </div>
+                
+                <!-- Item 5 -->
+                <div class="lanche-card" data-categoria="frango">
+                    <div class="lanche-img" style="background-color: #e9c46a;">
+                        <i class="fas fa-pepper-hot"></i>
+                    </div>
+                    <div class="lanche-info">
+                        <h3>Spicy Chicken</h3>
+                        <p>Filé de frango apimentado, pão brioche, queijo pepper jack, alface, cebola roxa e maionese picante.</p>
+                        <span class="lanche-preco">R$ 23,90</span>
+                    </div>
+                </div>
+                
+                <!-- Item 6 -->
+                <div class="lanche-card destaque" data-categoria="vegetariano destaque">
+                    <div class="lanche-img" style="background-color: #2a9d8f;">
+                        <i class="fas fa-cheese"></i>
+                    </div>
+                    <div class="lanche-info">
+                        <h3>Mushroom Paradise <span class="destaque-badge">Destaque</span></h3>
+                        <p>Hambúrguer de cogumelos portobello, queijo brie, rúcula, cebola caramelizada e molho trufado.</p>
+                        <span class="lanche-preco">R$ 28,50</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Separador visual -->
+            <div class="separador">
+                <div class="separador-texto">
+                    <i class="fas fa-lightbulb"></i> Tem uma ideia incrível?
+                </div>
+            </div>
+            
+            <!-- Formulário de sugestão -->
+            <div class="container-formulario">
+                <h2 class="titulo-formulario">Sugira um novo lanche!</h2>
+                <p class="subtitulo-formulario">Quer ver sua criação no nosso cardápio? Compartilhe com a gente!</p>
+                
                 <form id="form-rapido" action="/sugestao-enviada" method="POST">
                     <div class="grupo-formulario">
                         <label for="nome-rapido">Nome do lanche:</label>
@@ -56,14 +677,20 @@
                         <textarea id="ingredientes-rapido" name="ingredientes" required 
                                   placeholder="Descreva os ingredientes..."></textarea>
                     </div>
-                    <button type="submit" class="botao botao-bloco">Enviar sugestão</button>
+                    <button type="submit" class="botao botao-bloco">
+                        <i class="fas fa-paper-plane"></i> Enviar sugestão
+                    </button>
                 </form>
+                
+                <div class="rodape-formulario">
+                    <p>As melhores sugestões podem virar parte do nosso cardápio permanente!</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Rodapé -->
-    <footer>
+    <rodape>
         <div class="container">
             <div class="container-rodape">
                 <div class="coluna-rodape">
@@ -102,6 +729,67 @@
                 <p>&copy; 2023 DevBurger - Todos os direitos reservados | Desenvolvido com ❤️ e 🍔</p>
             </div>
         </div>
-    </footer>
+    </rodape>
+
+    <script>
+        // Filtro de cardápio
+        document.addEventListener('DOMContentLoaded', function() {
+            const filtroBotoes = document.querySelectorAll('.filtro-botao');
+            const lancheCards = document.querySelectorAll('.lanche-card');
+            
+            // Inicialmente mostrar todos os cards
+            lancheCards.forEach(card => {
+                card.style.display = 'block';
+            });
+
+            // Adicionar evento de clique aos botões de filtro
+            filtroBotoes.forEach(botao => {
+                botao.addEventListener('click', function() {
+                    // Efeito de clique
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                    
+                    // Remover classe ativa de todos os botões
+                    filtroBotoes.forEach(btn => btn.classList.remove('ativo'));
+                    // Adicionar classe ativa ao botão clicado
+                    this.classList.add('ativo');
+                    
+                    const categoria = this.getAttribute('data-categoria');
+                    
+                    // Aplicar filtro com animação
+                    lancheCards.forEach(card => {
+                        // Apenas animar os cards que vão mudar de estado
+                        if (categoria === 'todos' || card.getAttribute('data-categoria').includes(categoria)) {
+                            card.style.display = 'block';
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 50);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // Scroll suave para âncoras
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
